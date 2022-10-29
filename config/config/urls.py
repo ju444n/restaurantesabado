@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from web.views import Home
+from web.views import Home,Platos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('', Home)
+    path('', Home, name='home'),
+    path('platos/', Platos, name='platos')
 ]
