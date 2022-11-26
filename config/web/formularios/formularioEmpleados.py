@@ -1,35 +1,36 @@
 from django import forms
 
-class FormularioPlatos(forms.Form):
+class FormularioEmpleados(forms.Form):
 
-    PLATOS=(
-        (1,'Entrada'),
-        (2,'Plato Fuerte'),
-        (3,'Postre')
+    CARGO=(
+        (1,'Lava Platos'),
+        (2,'Chef'),
+        (3,'Mesero')
     )
 
     nombre=forms.CharField(
         required=True,
         max_length=20,
-        label='Nombre del Plato ',
+        label='Nombre del Empleado ',
         widget=forms.TextInput(attrs={'class':'form-control mb-3'})
     )
-    descripcion=forms.CharField(
+    apellido=forms.CharField(
         required=False,
         max_length=20,
-        widget=forms.Textarea(attrs={'class':'form-control mb-3'})
-    )
-    fotografia=forms.CharField(
-        required=False,
         widget=forms.TextInput(attrs={'class':'form-control mb-3'})
     )
-    precio=forms.CharField(
+    telefono=forms.CharField(
         required=True,
         max_length=20,
         widget=forms.NumberInput(attrs={'class':'form-control mb-3'})
     )
-    tipo=forms.ChoiceField(
+    direccion=forms.CharField(
+        required=False,
+        max_length=20,
+        widget=forms.TextInput(attrs={'class':'form-control mb-3'})
+    )
+    cargo=forms.ChoiceField(
         required=True,
         widget=forms.Select(attrs={'class':'form-select mb-3'}),
-        choices=PLATOS
+        choices=CARGO
     )

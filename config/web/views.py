@@ -2,7 +2,11 @@ from django.shortcuts import render
 
 from web.formularios.formularioPlatos import FormularioPlatos
 
+from web.formularios.formularioEmpleados import FormularioEmpleados
+
 from web.models import Platos
+
+from web.models import Empleados
 
 # Create your views here.
 
@@ -41,7 +45,7 @@ def PlatosVista(request):
             platoNuevo=Platos(
                 nombre=datosPlato["nombre"],
                 descripcion=datosPlato["descripcion"],
-                imagen=datosPlato["fotografia"],
+                fotografia=datosPlato["fotografia"],
                 precio=datosPlato["precio"],
                 tipo=datosPlato["tipo"]
             )
@@ -56,3 +60,46 @@ def PlatosVista(request):
                 data["bandera"]=False
 
     return render(request,'menuplatos.html',data)
+
+
+
+def EmpleadosVista(request):
+
+    empleadosConsultados=Empleados.objects.all()
+    print(empleadosConsultados)
+
+    formulario=FormularioEmpleados()
+
+    data={
+        'formulario2':formulario,
+        'bandera':False,
+        'empleados':empleadosConsultados
+    }
+
+    if request.method=='POST':
+        
+        datosDelFormulario=FormularioEmpleados(request.POST)
+        
+        if datosDelFormulario.is_valid():
+            
+            datosEmpleado=datosDelFormulario.cleaned_data
+            
+            empleadoNuevo=Empleados(
+                
+                nombre=datosEmpleado["nombre"],
+                apellido=datosEmpleado["apellido"],
+                telefono=datosEmpleado["telefono"],
+                direccion=datosEmpleado["direccion"],
+                fotografia=datosEmpleado["fotografia"],
+                cargo=datosEmpleado["cargo"],
+            )
+            try:
+                empleadoNuevo.save()
+                data["bandera"]=True
+                print("EXITO GUARDANDO LOS DATOS")
+            
+            except Exception as error:
+                print("error",error)
+                data["bandera"]=False
+
+    return render(request,'menuempleados.html',data)

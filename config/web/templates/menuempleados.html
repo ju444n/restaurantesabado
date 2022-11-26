@@ -34,12 +34,12 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-md-5">
-                    <img src="../static/img/vegetales.webp" alt="vegetales" class="w-100 img-fluid">
+                    <img src="../static/img/empelado.png" alt="vegetales" class="w-100 img-fluid">
                 </div>
                 <div class="col-12 col-md-7">
-                    <h2>Registro de platos</h2>
+                    <h2>Registro de empleados</h2>
                     <form method="POST">
-                        {{formulario}}
+                        {{formulario2}}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-success w-100">Enviar</button>
                     </form>
@@ -52,15 +52,15 @@
     <section>
         <div class="container">
             <div class="row row-cols-1 row-cols-md-4">
-                {% for plato in platos %}
-
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{plato.foto}}" alt="Card image cap">
+                {% for empleado in empleados %}
+  
+                    <img class="card-img-top" src="{{empleado.foto}}" alt="Card image cap">
                     <div class="card-body">
-                      <h1>{{plato.nombre}}</h1>
+                        <h1>{{empleado.nombre}}</h1>
                     </div>
                   </div>
-
+                
                 {% endfor %}
             </div>
         </div>
@@ -76,7 +76,7 @@
       
           <ul class="nav col-md-4 justify-content-end">
             <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
-            <li class="nav-item"><a href="{% url 'empleados' %}" class="nav-link px-2 text-muted">Empleados</a></li>
+            <li class="nav-item"><a href="{% url 'platos' %}" class="nav-link px-2 text-muted">Platos</a></li>
           </ul>
         </footer>
       </div>
